@@ -28,7 +28,7 @@ jobs:
         continue-on-error: true
 
       - name: Prettify code
-        run: pnpm exec prettify .
+        run: pnpm prettify .
 
       - name: Run tests
         run: pnpm test
