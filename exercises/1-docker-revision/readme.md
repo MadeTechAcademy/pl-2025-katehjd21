@@ -10,13 +10,12 @@ There's a basic node app in the docker-app folder.
 - Stop and remove the container
 
 ### Notes
-Add your thoughts and questions here
+Building the image creates the blueprint for the app and docker run creates a container of that image which is a runnable version of the app. 
+Docker logs is a really useful tool to log what is happening with your container, for example, what port it is listening on.
 
 
 ## Stretch task
 Consider how you might use `docker compose` tools to locally to build, spin up, shut down and clean up containers
 
 ### Record your results
-Add your thoughts here and add any files you created into the exercise folder
-
-
+Docker compose runs one or multiple containers.
