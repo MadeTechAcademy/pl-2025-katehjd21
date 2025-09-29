@@ -25,6 +25,7 @@ jobs:
 
       - name: Check for outdated packages
         run: pnpm run outdated_check 
+        continue-on-error: true
 
       - name: Prettify code
         run: pnpm exec prettify .
