@@ -29,10 +29,13 @@ jobs:
         run: pnpm install 
 
       - name: Check for outdated packages
-        run: pnpm outdated
+        run: pnpm exec outdated_check
 
       - name: Prettify code
-        run: pnpm prettify
+        run: pnpm exec prettify
+
+      - name: Run tests
+        run: pnpm test
   
 
 
