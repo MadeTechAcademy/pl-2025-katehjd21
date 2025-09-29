@@ -32,7 +32,7 @@ jobs:
         run: pnpm outdated
 
       - name: Prettify code
-        run: pnpm prettier:check
+        run: pnpm prettify
   
 
 
