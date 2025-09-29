@@ -14,6 +14,8 @@ Building the image creates the blueprint for the app and docker run creates a co
 Docker logs is a really useful tool to log what is happening with your container, for example, what port it is listening on.
 
 
+
+
 ## Stretch task
 Consider how you might use `docker compose` tools to locally to build, spin up, shut down and clean up containers
 
