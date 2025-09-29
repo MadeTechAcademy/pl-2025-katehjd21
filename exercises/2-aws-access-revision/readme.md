@@ -9,4 +9,7 @@ Knowing what you already know about connecting to the aws sandbox and running co
 - run the aws command line command to retrieve a list of s3 buckets on the account
 
 ## Notes
-Add your thoughts and questions here
+In the command line: aws-vault exec mt-playground -- aws s3api list-buckets (for nicely ordered json buckets)
+aws-vault exec mt-playground -- aws s3 ls
+
+
