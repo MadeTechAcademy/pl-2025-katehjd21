@@ -18,11 +18,11 @@ In later exercises we will be using aws s3 as a state provider for our terraform
 ## Outputs
 
 Keep a note of the following to use later:
-- the state bucket name,
-- the name of your key alias for your state bucket
-- the role *arn* that the github/aws link can assume.
+- the state bucket name = kates-s3-bucket,
+- the name of your key alias for your state bucket = kates-s3-bucket
+- the role *arn* that the github/aws link can assume = arn:aws:iam::261219435789:role/GHAction_AssumeRole_MadeTechAcademy_pl-2025-katehjd21
 
 ## Notes
-Add your thoughts and questions here
+Check for .auto and what it does.
 
 
