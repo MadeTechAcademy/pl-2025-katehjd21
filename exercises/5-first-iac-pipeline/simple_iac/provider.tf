@@ -27,7 +27,7 @@ terraform {
     key            = "pl2025_simple/terraform.tfstate"
     region         = "eu-west-2"
     encrypt        = true
-    kms_key_id     = "alias/kates-s3-bucket"
+    kms_key_id     = "alias/kates_kms_alias"
     use_lockfile = true
   }
 }
