@@ -1,0 +1,44 @@
+name: Exercise 3 Test & Deploy
+on:
+  push:
+      branches:
+        - main
+
+jobs:
+  check-ubuntu:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./exercises/3-github-actions/app
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies 
+        run: pnpm install 
+
+      - name: Check for outdated packages
+        run: pnpm run outdated_check 
+        continue-on-error: true
+
+      - name: Prettify code
+        run: pnpm prettify .
+
+      - name: Run tests
+        run: pnpm test
+  
+
+
+           
+
+
+    
+
+
+  
