@@ -16,4 +16,5 @@ Get your first pipeline up and running
 There could be more than one way to check the pipeline has completed, what ways can you think of?
 
 ## Notes
-Add your thoughts and questions here
+The variables created in the simple.yml file are what is used later on in the pipeline. 
+Don't forget to change provider.tf if you need to rename or change anything!

@@ -18,11 +18,11 @@ In later exercises we will be using aws s3 as a state provider for our terraform
 ## Outputs
 
 Keep a note of the following to use later:
-- the state bucket name,
+- the state bucket name 
 - the name of your key alias for your state bucket
-- the role *arn* that the github/aws link can assume.
+- the role *arn* that the github/aws link can assume 
 
 ## Notes
-Add your thoughts and questions here
+Check for .auto and what it does.
 
 

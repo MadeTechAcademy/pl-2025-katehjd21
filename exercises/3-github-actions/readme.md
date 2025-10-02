@@ -32,4 +32,4 @@ How would you temporarily suspend the pipeline so it didn't run on a push?
 For discussion: What else is missing from this pipeline? (no need to add it right now)
 
 ## Notes
-Add your thoughts and questions here
+pnpm outdate - should we update packages or just use this command to warn us of outdated packages.

@@ -1,0 +1,66 @@
+name: "5 Simple Change"
+ 
+on:
+  workflow_dispatch:
+ 
+env:
+ # verbosity setting for Terraform logs
+ TF_LOG: INFO
+ # S3 bucket for the Terraform state
+ BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
+ OWNER: ${{ vars.OWNER }}
+ BUCKET_NAME: "${{ vars.OWNER }}-simple-test"
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  terraform:
+    name: "Terraform Infrastructure Change Management"
+    environment: dev
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        # We keep Terraform files in an iac directory (simple example to prove ci/cd).
+        working-directory: ./exercises/5-first-iac-pipeline/simple_iac
+
+    steps:
+      - name: Checkout the repository to the runner
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform with specified version on the runner
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.12.1
+
+      - name: Set up variables
+        id: config
+        run: |
+         touch vars.auto.tfvars
+         echo "owner = \"$OWNER\"" >> vars.auto.tfvars
+         echo "s3_bucket_name = \"$BUCKET_NAME\"" >> vars.auto.tfvars
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v5.0.0
+        with:
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Terraform init
+        id: init
+        run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform plan
+        id: plan
+        run: terraform plan -no-color -input=false
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false
