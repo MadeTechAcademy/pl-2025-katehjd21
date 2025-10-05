@@ -14,8 +14,6 @@ permissions:
   id-token: write
   contents: write
 
-
-
 jobs:
   terraform-docker-deploy:
     runs-on: ubuntu-latest

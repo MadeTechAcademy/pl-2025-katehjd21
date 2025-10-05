@@ -1,0 +1,40 @@
+name: Stretch Task Exercise 6 Test & Deploy 
+on:
+  workflow_dispatch
+
+env:
+  OWNER: ${{ vars.OWNER }}
+  FIXED_IMAGE_TAG: ${{ vars.FIXED_IMAGE_TAG }}
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10
+
+    - name: Change working directory
+      run: echo "Changed working directory to ./exercises/3-github-actions/app"
+      working-directory: ./exercises/3-github-actions/app
+
+    - name: Install dependencies 
+      run: pnpm install 
+
+    - name: Check for outdated packages
+      run: pnpm run outdated_check 
+      continue-on-error: true
+
+    - name: Prettify code
+      run: pnpm prettify .
+
+    - name: Run tests
+      run: pnpm test
