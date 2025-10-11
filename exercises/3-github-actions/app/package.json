@@ -11,7 +11,7 @@
         "test": "jest",
         "dev": "nodemon --inspect=0.0.0.0:9229 -L src/index.js",
         "security_audit": "npx audit-ci --config audit-ci.json",
-        "outdated_check": "configure_me"
+        "outdated_check": "pnpm outdated"
     },
     "dependencies": {
         "express": "^4.21",
