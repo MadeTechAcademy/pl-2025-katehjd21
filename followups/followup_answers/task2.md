@@ -1,4 +1,4 @@
-Q2. Explain what you understand of the approach to hosting apps in the course.
+## Q2. Explain what you understand of the approach to hosting apps in the course.
 
 From the Pipelines course, I learned that the approach to hosting applications should be automated using a pipeline
 wherever possible. Automation ensures that deployments are reliable and consistent, with the same steps executed every

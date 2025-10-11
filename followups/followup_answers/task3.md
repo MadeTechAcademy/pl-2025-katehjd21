@@ -1,4 +1,4 @@
-Q3. How does this differ from approaches you've used before? What's the impact of changing our mind? and the benefits?
+## Q3. How does this differ from approaches you've used before? What's the impact of changing our mind? and the benefits?
 
 I have been very lucky to have had prior exposure to pipelines, both during the apprenticeship project at the end of our
 bootcamp and in my current delivery. This has allowed me to see firsthand how useful and beneficial they are in real life.
@@ -10,7 +10,7 @@ Since using pipelines, I have noticed that the process is automated, repeatable,
 manual approach was unreliable and prone to human error, so can definitely see why pipelines are used despite them 
 taking slightly longer to set up.
 
-IMPACT OF CHANGING OUR MIND
+# IMPACT OF CHANGING OUR MIND
 I am not sure what context this is meant to be in so I will answer both way that I think I could go about this question.
 
 If we need to change or update the deployment process, such as adding a new step, it is much easier to update the
@@ -20,7 +20,7 @@ would require repetitive effort, consume additional time and resources, and coul
 Adopting the new approach of pipelines and automation requires an initial setup and learning effort, but the long-term
 impact it has is significant as deployments become faster, safer, and more reliable.
 
-BENEFITS OF THE NEW APPROACH OF USING PIPELINES
+# BENEFITS OF THE NEW APPROACH OF USING PIPELINES
 - Saves time and reduces repetitive manual work/tasks.
 - Reduces errors and failed deployments
 - Ensures testing and validation run automatically

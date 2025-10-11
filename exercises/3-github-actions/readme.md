@@ -107,80 +107,17 @@ Runs the test script defined in package.json, which executes all Jest tests in t
 
 Had an interesting discussion on when we would want the workflow to stop on an error, and when we would want the workflow to continue on an error but just give us a warning. We spoke about `pnpm outdated` and whether this command should stop the workflow and we have to update packages or just use this command to warn us of outdated packages.
 
-1. Purpose of pnpm outdated
+1. Purpose of `pnpm outdated`
+- Checks for newer versions of the dependencies used in your project.
+- Does not update anything but just reports outdated packages.
+- Can be configured so that it just gives warning and continues the workflow rather than completely stopping the pipeline entirely.
 
-pnpm outdated checks for newer versions of the dependencies used in your project.
+2. Pros of Just Warning about Outdated Packages (Not Updating Automatically) 
+- The workflow continues with a warning but doesn't completely stop the pipeline entirely.
+- Prevents breaking changes that might occur if new package versions are installed automatically.
+- Gives engineers the opportunity to review updates, check logs, and test changes before updating the dependencies.
 
-It does not update anything—it just reports what’s behind.
-
-It’s safe to run in CI/CD pipelines because it won’t break anything.
-
-2. Pros of Just Warning (Not Updating Automatically)
-
-Keeps the workflow stable and predictable.
-
-Avoids breaking changes from new package versions being installed automatically.
-
-Allows the team to review updates, check changelogs, and test before updating.
-
-Works well if you have a CI/CD pipeline where stability is critical.
-
-3. Pros of Updating Automatically
-
-Ensures dependencies are always up to date.
-
-Reduces the risk of security vulnerabilities in old packages.
-
-Can be automated with pnpm up or GitHub Actions bots like Dependabot.
-
-Cons:
-
-Can introduce breaking changes that fail your build or tests.
-
-Harder to control timing of updates, especially in production projects.
-
-4. Verdict
-
-For most CI/CD workflows:
-
-Use pnpm outdated to warn you about outdated packages.
-
-Manually update packages after reviewing them, ideally in a dedicated branch or PR.
-
-Combine this with automated notifications (Dependabot or similar) if you want a structured update process.
-
-This strikes a balance between staying current and keeping your workflow stable.
-
-If you want, I can sketch a workflow pattern that uses pnpm outdated to warn in CI/CD but safely updates packages on a separate branch. This is a common industry practice. Do you want me to do that?
-
-You said:
-But should I have it warning or erroring and failing?
-ChatGPT said:
-
-In most cases, it’s better to have it warning, not failing. Here’s why:
-
-1. Warning (Recommended)
-
-Shows you outdated packages without breaking the CI/CD pipeline.
-
-Developers can review and update dependencies deliberately.
-
-Keeps builds stable, avoiding accidental failures from minor or major version changes.
-
-continue-on-error: true in GitHub Actions is perfect for this.
-
-2. Error / Failing
-
-Forces updates before the workflow can proceed.
-
-Could break the build if updates introduce incompatibilities.
-
-Only suitable if your project has a strict policy of always using the latest versions and automated tests fully guarantee safety.
-
-Verdict
-
-Use warnings in CI/CD (recommended).
-
-Combine with automated alerts or Dependabot to track outdated packages.
-
-Only fail the build if your team has a strong reason to enforce always-up-to-date dependencies, which is rare in practice.
+3. Pros of Updating Packages Automatically
+- Keeps dependencies consistently up to date.
+- Reduces the risk of security vulnerabilities in outdated packages.
+- Can be automated with tools like Dependabot in GitHub actions.
