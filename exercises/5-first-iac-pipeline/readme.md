@@ -16,5 +16,19 @@ Get your first pipeline up and running
 There could be more than one way to check the pipeline has completed, what ways can you think of?
 
 ## Notes
-The variables created in the simple.yml file are what is used later on in the pipeline. 
-Don't forget to change provider.tf if you need to rename or change anything!
+
+# Running Terraform Commands in a Pipeline
+When using Terraform in a pipeline, Terraform commands should be executed within the pipeline rather than manually in your local terminal. Running commands locally could cause a number of issues including:
+
+- Accidental misconfigurations: Local changes may not follow the pipeline’s validation and review processes.
+- Environmental drift: Differences between your local environment and the target infrastructure can cause inconsistencies.
+- Unapproved changes: Local execution can bypass code review, approvals, or automated checks defined in the pipeline.
+
+Therefore, using the pipeline to run the Terraform commands ensures consistent and safe application of infrastructure changes.
+
+
+# In the `simple.yml` & `simple_cleanup.yml` files:
+- `-backend-config` = Overrides the backend configuration. In this case, it tells Terraform to use the S3 bucket specified by the environment variable $BUCKET_TF_STATE as the remote terraform state storage.
+- `-no-color` = Disables colour codes in command output.
+- `input=false` = Prevents Terraform from asking for interactive input. This is required in pipelines so Terraform doesn't hang waiting for user input.
+- `auto-approve` = Skips the interactive approval prompt and instead auto approves it.
