@@ -37,4 +37,11 @@ What happens to any log groups or traces that get created? What about after clea
 Aws has a developer guide for *everything*. Heres the one for [App Runner](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html)
 
 ## Notes
-Add your thoughts and questions here
+
+# There could be more than one way to check a pipeline has completed, what ways can you think of?
+- Check the logs e.g. AWS CloudWatch Logs, to see completion messages or errors.
+- You can set up GitHub Actions so that it sends email, Slack, or Teams notifications when a workflow completes.
+- If expecting creation of resources e.g. infrastructure resources in AWS such as an EC2 instance or S3 bucket, you could go and check whether this has been created or not.
+
+# What happens to any log groups or traces that get created? What about after clean up?
+Logs and traces created during pipeline execution are usually stored in a cloud logging service like AWS CloudWatch. By default, they may be kept indefinitely, but you can configure retention settings so that logs older than a certain period are deleted. Logs can also be exported to an S3 bucket or saved as artifacts for later review. Even after cleanup of resources, the log groups and traces may still exist depending on the retention policy, and if you want them removed, you may need to go and delete them yourself or adjust the retention settings.

@@ -1,0 +1,17 @@
+## Q2. Explain what you understand of the approach to hosting apps in the course.
+
+From the Pipelines course, I learned that the approach to hosting applications should be automated using a pipeline
+wherever possible. Automation ensures that deployments are reliable and consistent, with the same steps executed every
+time an app is deployed. The benefits of this approach include:
+
+- Automated validation checks before deployment.
+- Triggered deployments on every commit (or according to configured rules).
+- Time savings and reduced errors.
+- Minimised repetitive manual tasks.
+- Consistency across different environments, helping to ensure that the app behaves as expected in both development
+and production.
+- Consistent monitoring and logging to maintain reliability and quickly address any issues that arise.
+
+Due to this, creating a strong deployment pipeline, which serves as the foundation for deploying an app, is crucial.
+It helps give confidence in the code you write and reassurance that the app is behaving as intended.
+

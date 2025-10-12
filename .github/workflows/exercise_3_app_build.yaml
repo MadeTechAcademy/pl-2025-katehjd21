@@ -5,7 +5,7 @@ on:
         - main
 
 jobs:
-  check-ubuntu:
+  test:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4

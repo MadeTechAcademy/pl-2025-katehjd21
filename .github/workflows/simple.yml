@@ -1,26 +1,31 @@
-name: 6 Deploy
-on: 
+name: "5 Simple Change"
+ 
+on:
   workflow_dispatch:
-
+ 
 env:
  # verbosity setting for Terraform logs
- TF_LOG: WARN 
+ TF_LOG: INFO
  # S3 bucket for the Terraform state
  BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
  OWNER: ${{ vars.OWNER }}
- FIXED_IMAGE_TAG: ${{ vars.FIXED_IMAGE_TAG }}
+ BUCKET_NAME: "${{ vars.OWNER }}-simple-test"
 
-permissions: 
+permissions:
   id-token: write
   contents: write
 
 jobs:
-  terraform-docker-deploy:
+  terraform:
+    name: "Terraform Infrastructure Change Management"
+    environment: dev
+
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
-        working-directory: ./exercises/6-first-app-deploy-pipeline/deploy
+        # We keep Terraform files in an iac directory (simple example to prove ci/cd).
+        working-directory: ./exercises/5-first-iac-pipeline/simple_iac
 
     steps:
       - name: Checkout the repository to the runner
@@ -36,8 +41,7 @@ jobs:
         run: |
          touch vars.auto.tfvars
          echo "owner = \"$OWNER\"" >> vars.auto.tfvars
-         echo "ecr_repository = \"hello\"" >> vars.auto.tfvars
-         echo "fixed_image_tag = \"$FIXED_IMAGE_TAG\"" >> vars.auto.tfvars
+         echo "s3_bucket_name = \"$BUCKET_NAME\"" >> vars.auto.tfvars
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v5.0.0
@@ -60,5 +64,3 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false
-
-

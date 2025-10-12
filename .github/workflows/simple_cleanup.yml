@@ -1,26 +1,29 @@
-name: 6 Deploy
-on: 
+name: "5 Simple Nuke via GitHub Actions"
+ 
+on:
   workflow_dispatch:
 
 env:
  # verbosity setting for Terraform logs
- TF_LOG: WARN 
+ TF_LOG: INFO
  # S3 bucket for the Terraform state
  BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
  OWNER: ${{ vars.OWNER }}
- FIXED_IMAGE_TAG: ${{ vars.FIXED_IMAGE_TAG }}
 
-permissions: 
+permissions:
   id-token: write
   contents: write
 
 jobs:
-  terraform-docker-deploy:
+  terraform:
+    name: "Simple Terraform Infrastructure Manual Nuke"
+    environment: dev
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
-        working-directory: ./exercises/6-first-app-deploy-pipeline/deploy
+        # We keep Terraform files in an iac directory (simple example to prove ci/cd).
+        working-directory: ./exercises/5-first-iac-pipeline/simple_iac
 
     steps:
       - name: Checkout the repository to the runner
@@ -36,8 +39,7 @@ jobs:
         run: |
          touch vars.auto.tfvars
          echo "owner = \"$OWNER\"" >> vars.auto.tfvars
-         echo "ecr_repository = \"hello\"" >> vars.auto.tfvars
-         echo "fixed_image_tag = \"$FIXED_IMAGE_TAG\"" >> vars.auto.tfvars
+         echo "s3_bucket_name = \"$OWNER_simple_test\"" >> vars.auto.tfvars
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v5.0.0
@@ -50,15 +52,5 @@ jobs:
         id: init
         run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
 
-      - name: Terraform validate
-        id: validate
-        run: terraform validate
-
-      - name: Terraform plan
-        id: plan
-        run: terraform plan -no-color -input=false
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false
-
-
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve

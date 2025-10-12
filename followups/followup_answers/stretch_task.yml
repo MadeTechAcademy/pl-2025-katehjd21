@@ -1,0 +1,56 @@
+name: Stretch Task Exercise 6 Test & Deploy
+on:
+  workflow_dispatch:
+
+env:
+  OWNER: ${{ vars.OWNER }}
+  FIXED_IMAGE_TAG: ${{ vars.FIXED_IMAGE_TAG }}
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  build-and-deploy:
+    name: Build & Push Docker Image to ECR
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./exercises/6-first-app-deploy-pipeline/node
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies 
+        run: pnpm install 
+
+      - name: Run tests
+        run: pnpm test || true
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5.0.0
+        with:
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ vars.AWS_REGION }}
+    
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push Docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: ${OWNER}-ecr-repo
+        run: |
+          docker build -t $REGISTRY/$REPOSITORY:$FIXED_IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$FIXED_IMAGE_TAG
+
+# Have added || true next to test run for now as package.json says: "test": "echo \"Error: no test specified\" && exit 1"

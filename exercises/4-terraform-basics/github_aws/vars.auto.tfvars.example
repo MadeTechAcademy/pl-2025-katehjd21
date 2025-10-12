@@ -1,6 +1,6 @@
-owner               = "yourname" # update
+owner               = "Kate.Drew" # update
 github_organisation = "MadeTechAcademy" # update if instructed
-github_repo         = "your-classroom-repo-name" # eg chapter2-pipelines-tess-barnes-mt
-account_id          = 000000000 # update to the sandbox account number, see your aws config
-state_bucket        = "your-state-bucket-name" # from the s3 backend exercise
-state_key_alias     = "alias/your-key-alias" # from the s3 backend exercise
+github_repo         = "pl-2025-katehjd21" # eg chapter2-pipelines-tess-barnes-mt
+account_id          = 261219435789 # update to the sandbox account number, see your aws config
+state_bucket        = "kates-s3-bucket" # from the s3 backend exercise
+state_key_alias     = "kates_kms_alias" # from the s3 backend exercise
