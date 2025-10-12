@@ -4,13 +4,13 @@ on:
 
 env:
  # verbosity setting for Terraform logs
- TF_LOG: WARN
+ TF_LOG: WARN 
  # S3 bucket for the Terraform state
  BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
  OWNER: ${{ vars.OWNER }}
  FIXED_IMAGE_TAG: ${{ vars.FIXED_IMAGE_TAG }}
 
-permissions:
+permissions: 
   id-token: write
   contents: write
 

@@ -37,4 +37,8 @@ What happens to any log groups or traces that get created? What about after clea
 Aws has a developer guide for *everything*. Heres the one for [App Runner](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html)
 
 ## Notes
-Add your thoughts and questions here
+
+# There could be more than one way to check a pipeline has completed, what ways can you think of?
+
+
+# What happens to any log groups or traces that get created? What about after clean up?

@@ -5,7 +5,7 @@ on:
         - main
 
 jobs:
-  check-ubuntu:
+  test:
     runs-on: ubuntu-latest
     defaults:
       run:
