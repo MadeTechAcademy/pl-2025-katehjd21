@@ -29,9 +29,6 @@ If the pipeline only displayed a warning and continued to pass (i.e. still showe
 # Task 2
 The pipeline fails due to a missing directory. In this example, the workflow is looking for:
 `/home/runner/work/pl-2025-katehjd21/pl-2025-katehjd21/exercises/7-troubleshooting/deploy`
-However, the deploy folder doesn't exist currently, which is why the pipeline fails. Because this folder is missing, there is also no Terraform files contained within it. Consequently, when the pipeline runs terraform init, there are no configuration files for Terraform to initialize, causing the failure.
+However, the deploy folder doesn't exist currently, which is why the pipeline fails. Because this folder is missing, there is also no Terraform files contained within it. Consequently, when the pipeline runs terraform init, there are no configuration files for Terraform to initialise, causing the failure.
 
 To make the pipeline pass, we would need to create a deploy folder and add the necessary Terraform files (e.g., main.tf with the backend configuration for our S3 bucket) so that Terraform actually has a valid working directory to initialise.
-
-
-# Task 3
